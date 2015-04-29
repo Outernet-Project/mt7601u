@@ -27,31 +27,6 @@
 
 
 #include "rt_config.h"
-#ifdef DOT11_N_SUPPORT
-#if defined(RT65xx) || defined(MT7601)
-#define MAX_AGG_CNT	32
-#elif defined(RT2883) || defined(RT3883)
-#define MAX_AGG_CNT	16
-#else
-#define MAX_AGG_CNT	8
-#endif
-/* DisplayTxAgg - display Aggregation statistics from MAC */
-void DisplayTxAgg (RTMP_ADAPTER *pAd)
-{
-	ULONG totalCount;
-	ULONG aggCnt[MAX_AGG_CNT + 2];
-	int i;
-
-	AsicReadAggCnt(pAd, aggCnt, sizeof(aggCnt) / sizeof(ULONG));
-	totalCount = aggCnt[0] + aggCnt[1];
-	if (totalCount > 0)
-		for (i=0; i<MAX_AGG_CNT; i++) {
-			DBGPRINT(RT_DEBUG_OFF, ("\t%d MPDU=%ld (%ld%%)\n", i+1, aggCnt[i+2], aggCnt[i+2]*100/totalCount));
-		}
-	printk("====================\n");
-
-}
-#endif /* DOT11_N_SUPPORT */
 
 static BOOLEAN RT_isLegalCmdBeforeInfUp(
        IN PSTRING SetCmd);
