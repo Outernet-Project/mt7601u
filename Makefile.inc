@@ -29,8 +29,7 @@ include $(RT28xx_DIR)/os/linux/config.mk
 RTMP_SRC_DIR = $(RT28xx_DIR)/RT$(MODULE)
 
 #PLATFORM: Target platform
-PLATFORM = BUILDROOT
-#PLATFORM = PC
+PLATFORM = PC
 #PLATFORM = 5VT
 #PLATFORM = IKANOS_V160
 #PLATFORM = IKANOS_V180
@@ -192,16 +191,8 @@ CROSS_COMPILE = mips-wrs-linux-gnu-
 endif
 
 ifeq ($(PLATFORM),PC)
-# Linux 2.6
-LINUX_SRC = /lib/modules/$(shell uname -r)/build
-# Linux 2.4 Change to your local setting
-#LINUX_SRC = /usr/src/linux-2.4
-LINUX_SRC_MODULE = /lib/modules/$(shell uname -r)/kernel/drivers/net/wireless/
-CROSS_COMPILE = 
-endif
-
-ifeq ($(PLATFORM),BUILDROOT)
-LINUX_SRC = $(KSRC)
+LINUX_SRC ?= /lib/modules/$(shell uname -r)/build
+CROSS_COMPILE ?= 
 endif
 
 ifeq ($(PLATFORM),INTELP6)
