@@ -1,3 +1,5 @@
+export KSRC
+
 all:
 	make -C src/ osutil
 	make -C src/ build_tools
